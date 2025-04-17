@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Collection {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  stock       Int
+  price       Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  bids        Bid[]
+
+  @@index([userId])
+}
+
+model Bid {
+  id           String     @id @default(uuid())
+  price        Float
+  status       BidStatus  @default(PENDING)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  collectionId String
+  collection   Collection @relation(fields: [collectionId], references: [id])
+
+  @@index([userId])
+  @@index([collectionId])
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String
+  email       String       @unique
+  collections Collection[]
+  bids        Bid[]
+}
+
+enum BidStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
