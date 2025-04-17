@@ -84,6 +84,10 @@ The application follows a standard Next.js architecture:
 - **API**: Next.js API routes for handling data operations
 - **Database**: PostgreSQL with Prisma ORM for data management
 
+## Repository
+
+You can find the repository here: [Repository](https://github.com/surfercoder/bidding-system)
+
 ## Explanatory video
 
 You can see the app up and running with an explanation of how to use it here: [Explanatory Video](https://www.loom.com/share/93e26338d43040c188e07fcb88e4eb37?sid=34ae0f6e-f732-42a5-af57-e31c2ddb1997)
