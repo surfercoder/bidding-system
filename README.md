@@ -88,6 +88,10 @@ The application follows a standard Next.js architecture:
 
 You can see the app up and running with an explanation of how to use it here: [Explanatory Video](https://www.loom.com/share/93e26338d43040c188e07fcb88e4eb37?sid=34ae0f6e-f732-42a5-af57-e31c2ddb1997)
 
+## Live demo
+
+You can see the app up and running here: [Live Demo](https://bidding-system-sigma.vercel.app/)
+
 ## Monitoring and Performance
 
 ### How would you monitor the application to ensure it is running smoothly?
