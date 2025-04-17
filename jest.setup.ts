@@ -5,27 +5,13 @@ if (typeof global.TextEncoder === 'undefined') {
   global.TextEncoder = require('util').TextEncoder;
 }
 
+import { Response as CrossFetchResponse } from 'cross-fetch';
+
 if (typeof global.Response === 'undefined') {
-  global.Response = class Response {
-    ok: boolean;
-    status: number;
-    statusText: string;
-    headers: Headers;
-    body: any;
-
-    constructor(body?: any, init?: ResponseInit) {
-      this.ok = init?.status ? init.status >= 200 && init.status < 300 : true;
-      this.status = init?.status || 200;
-      this.statusText = init?.statusText || '';
-      this.headers = new Headers(init?.headers);
-      this.body = body;
-    }
-
-    async json() {
-      return Promise.resolve(this.body);
-    }
-  };
+  // @ts-ignore
+  global.Response = CrossFetchResponse;
 }
+
 
 // Mock fetch globally
 global.fetch = jest.fn();
