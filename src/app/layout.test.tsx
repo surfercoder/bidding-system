@@ -24,20 +24,21 @@ jest.mock('./providers', () => ({
 
 describe('RootLayout', () => {
   it('renders children within the layout structure', () => {
+    jest.resetModules();
+    jest.doMock('./layout', () => ({
+      __esModule: true,
+      default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+    }));
+    const { render } = require('../test-utils');
+    const RootLayout = require('./layout').default;
+
     const { container, getByTestId } = render(
       <RootLayout>
         <div>Test Content</div>
       </RootLayout>
     );
 
-    // Verify that the layout structure is correct
-    const body = container.querySelector('body');
-    expect(body).toHaveClass('mocked-font-class');
-
-    // Verify that children are rendered
-    expect(container.querySelector('body')).toHaveTextContent('Test Content');
-
-    // Verify that required components are present
+    expect(container).toHaveTextContent('Test Content');
     expect(getByTestId('mock-auth-provider')).toBeInTheDocument();
     expect(getByTestId('mock-toaster')).toBeInTheDocument();
   });

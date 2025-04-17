@@ -13,6 +13,19 @@ if (typeof global.Response === 'undefined') {
 }
 
 
+// Polyfill BroadcastChannel for MSW compatibility
+if (typeof global.BroadcastChannel === 'undefined') {
+  class BroadcastChannel {
+    name: string;
+    constructor(name: string) { this.name = name; }
+    postMessage() {}
+    close() {}
+    // AddEventListener and removeEventListener are not needed for MSW tests
+  }
+  // @ts-ignore
+  global.BroadcastChannel = BroadcastChannel;
+}
+
 // Mock fetch globally
 global.fetch = jest.fn();
 

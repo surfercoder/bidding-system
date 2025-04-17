@@ -78,9 +78,10 @@ describe('CollectionForm', () => {
 
     render(<CollectionForm onSuccess={mockOnSuccess} />);
 
+    await userEvent.clear(screen.getByPlaceholderText('Stock quantity'));
     await userEvent.type(screen.getByPlaceholderText('Collection name'), 'New Collection');
     await userEvent.type(screen.getByPlaceholderText('Collection description'), 'This is a new test collection description');
-    await userEvent.type(screen.getByPlaceholderText('Stock quantity'), '10');
+    await userEvent.type(screen.getByPlaceholderText('Stock quantity'), '110');
     await userEvent.type(screen.getByPlaceholderText('Price'), '50');
 
     fireEvent.click(screen.getByRole('button'));
@@ -92,7 +93,7 @@ describe('CollectionForm', () => {
         body: JSON.stringify({
           name: 'New Collection',
           description: 'This is a new test collection description',
-          stock: 10,
+          stock: 110,
           price: 50,
           userId: mockUser.id,
         }),
@@ -177,10 +178,15 @@ describe('CollectionForm', () => {
   it('prevents submission when user is not authenticated', async () => {
     (useAuth as jest.Mock).mockReturnValue({ user: null });
 
+    // Explicitly mock useAuth to return no user
+    (useAuth as jest.Mock).mockReturnValue({ user: null });
     render(<CollectionForm onSuccess={mockOnSuccess} />);
 
+    await userEvent.clear(screen.getByPlaceholderText('Stock quantity'));
     await userEvent.type(screen.getByPlaceholderText('Collection name'), 'New Collection');
     await userEvent.type(screen.getByPlaceholderText('Collection description'), 'This is a new test collection description');
+    await userEvent.type(screen.getByPlaceholderText('Stock quantity'), '10');
+    await userEvent.type(screen.getByPlaceholderText('Price'), '50');
 
     fireEvent.click(screen.getByRole('button'));
 

@@ -58,15 +58,19 @@ describe('BidForm', () => {
     
     const input = screen.getByLabelText(/your bid/i);
     await user.clear(input);
+    await user.clear(input);
     await user.type(input, '-10');
-    
+
     const submitButton = screen.getByText(/place bid/i);
     await act(async () => {
       fireEvent.click(submitButton);
     });
-    
+
     await waitFor(() => {
-      expect(screen.getByText(/price must be positive/i)).toBeInTheDocument();
+      // Use a function matcher to match the error message flexibly
+      expect(
+        screen.queryByText((content) => /price must be positive/i.test(content))
+      ).toBeInTheDocument();
     });
     expect(global.fetch).not.toHaveBeenCalled();
   });

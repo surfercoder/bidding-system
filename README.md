@@ -28,7 +28,7 @@ A full-stack bidding system built with Next.js, Shadcn/UI, and Prisma (PostgreSQ
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/bidding-system.git
+git clone https://github.com/surfercoder/bidding-system.git
 cd bidding-system
 ```
 
@@ -83,6 +83,10 @@ The application follows a standard Next.js architecture:
 - **Frontend**: React components with TailwindCSS and Shadcn/UI for styling
 - **API**: Next.js API routes for handling data operations
 - **Database**: PostgreSQL with Prisma ORM for data management
+
+## Explanatory video
+
+You can see the app up and running with an explanation of how to use it here: [Explanatory Video](https://www.loom.com/share/93e26338d43040c188e07fcb88e4eb37?sid=34ae0f6e-f732-42a5-af57-e31c2ddb1997)
 
 ## Monitoring and Performance
 
